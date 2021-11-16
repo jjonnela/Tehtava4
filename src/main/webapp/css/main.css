@@ -1,0 +1,37 @@
+table {
+	border: 1px solid black;
+	text-align: right;
+	width: 800px;
+}
+
+.nappi {
+	background-color: white;
+	display:block;
+	margin:auto;
+	width: 80px;
+	font-size: 20px;
+	padding: 5px;
+}
+
+.hakulaatikko {
+	display:block;
+	margin:auto;
+	width: 300px;
+	padding: 5px;
+}
+
+.hakurivi {
+	background-color: black;
+	color: white;
+	padding: 5px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.otsikkorivi {
+	font-size: 20px;
+}
+
+tr {
+	background-color: yellow;
+}
