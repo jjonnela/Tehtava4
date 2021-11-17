@@ -1,37 +1,53 @@
+@charset "ISO-8859-1";
 table {
-	border: 1px solid black;
-	text-align: right;
-	width: 800px;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;  
+  width: 800px;
 }
 
-.nappi {
-	background-color: white;
-	display:block;
-	margin:auto;
-	width: 80px;
-	font-size: 20px;
-	padding: 5px;
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tbody tr:nth-child(even){background-color: #ebc6f5;}
+table tbody tr:nth-child(odd){background-color: #f6defc;}
+
+table tbody tr:hover {background-color: white;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #2b0436;
+  color: white;
+  text-align: center;
+}
+
+.poista{
+	color: #021c2e;
+	text-decoration: underline;
+	cursor: pointer;	
+}
+
+.oikealle{
+	text-align: right;	
+	
+}
+
+#uusiAsiakas, #takaisin{
+	color: white;	
+	cursor: pointer;	
+}
+
+.tiedot {
+	text-align: right;
 }
 
 .hakulaatikko {
-	display:block;
-	margin:auto;
-	width: 300px;
-	padding: 5px;
+	width: 500px;
+	height: 30px;
 }
 
-.hakurivi {
-	background-color: black;
-	color: white;
-	padding: 5px;
-	font-size: 30px;
+.lisayslaatikot {
 	text-align: center;
-}
-
-.otsikkorivi {
-	font-size: 20px;
-}
-
-tr {
-	background-color: yellow;
 }

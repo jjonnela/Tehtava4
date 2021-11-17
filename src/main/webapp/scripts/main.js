@@ -1,3 +1,4 @@
+
 function requestURLParam(sParam){
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split("&");
@@ -8,3 +9,12 @@ function requestURLParam(sParam){
         }
     }
 }
+function formDataJsonStr(formArray) {
+	var returnArray = {};
+	for (var i = 0; i < formArray.length; i++){
+		returnArray[formArray[i]['name']] = formArray[i]['value'];
+	}
+	return JSON.stringify(returnArray);
+}
+
+
