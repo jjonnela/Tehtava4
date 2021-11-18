@@ -1,42 +1,67 @@
 @charset "ISO-8859-1";
+
+body {
+	background-color: #140221;
+}
+
 table {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;  
-  width: 800px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
 }
 
 table td, table th {
-  border: 1px solid #ddd;
-  padding: 8px;
+	border: 1px solid #ddd;
+	padding: 8px;
 }
 
-table tbody tr:nth-child(even){background-color: #ebc6f5;}
-table tbody tr:nth-child(odd){background-color: #f6defc;}
+table tbody tr:nth-child(even) {
+	background-color: #ebc6f5;
+}
 
-table tbody tr:hover {background-color: white;}
+table tbody tr:nth-child(odd) {
+	background-color: #f6defc;
+}
+
+table tbody td:nth-child(7) {
+	background-color: #9c1924;
+	text-align: center;
+}
+
+table tbody td:nth-child(6) {
+	background-color: #180d5c;
+	text-align: center;
+}
+
+table tbody tr:hover {
+	background-color: white;
+}
 
 table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  background-color: #2b0436;
-  color: white;
-  text-align: center;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #2b0436;
+	color: white;
+	text-align: center;
 }
 
-.poista{
-	color: #021c2e;
-	text-decoration: underline;
-	cursor: pointer;	
+.poista {
+	color: white;
+	cursor: pointer;
 }
 
-.oikealle{
-	text-align: right;	
-	
+.muuta {
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
 }
 
-#uusiAsiakas, #takaisin{
-	color: white;	
-	cursor: pointer;	
+#uusiAsiakas, #takaisin {
+	color: white;
+	cursor: pointer;
 }
 
 .tiedot {
@@ -50,4 +75,12 @@ table th {
 
 .lisayslaatikot {
 	text-align: center;
+}
+
+.alanappi {
+	width: 250px;
+}
+
+.lisaalaatikko {
+	width: 250px;
 }
