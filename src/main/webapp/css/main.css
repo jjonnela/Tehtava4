@@ -84,3 +84,19 @@ table th {
 .lisaalaatikko {
 	width: 250px;
 }
+
+.virhe {
+	color: red;
+
+}
+
+.onnistuminen {
+	color: green;
+
+}
+
+.ilmoitusdiv {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}

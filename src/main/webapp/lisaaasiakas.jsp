@@ -5,8 +5,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <script src="scripts/main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <title>Insert title here</title>
 </head>
@@ -27,76 +25,80 @@
 				<td><input type="text" name="sukunimi" id="sukunimi"></td>
 				<td><input type="text" name="puhelin" id="puhelin"></td>
 				<td><input type="text" name="sposti" id="sposti"></td> 
-				<td><input type="submit" id="tallenna" value="Lisää"></td>
+				<td><input type="button" id="tallenna" value="Lisää" onClick="lisaaTiedot()"></td>
 			</tr>
 		</tbody>
 	</table>
+	<span class="ilmoitus" id="ilmo"></span>
 	<table class="alanappi">
 			<tr>
-				<th><span id="takaisin">Takaisin listaukseen</span></th>
+				<th><a id="takaisin" href="listaaasiakkaat.jsp">Takaisin listaukseen</a></th>
 			</tr>	
 	</table>
 </form>
-<span id="ilmo"></span>
+
+	<div class="ilmoitusdiv">
+	<span class="ilmoitus" id="ilmo"></span>
+	</div>
+
 </body>
 <script>
-$(document).ready(function(){
-	$("#takaisin").click(function(){
-		document.location="listaaasiakkaat.jsp";
-	});
-	$("#tiedot").validate({						
-		rules: {
-			etunimi:  {
-				required: true,
-				minlength: 1				
-			},	
-			sukunimi:  {
-				required: true,
-				minlength: 1				
-			},
-			puhelin:  {
-				required: true,
-				minlength: 7
-			},	
-			sposti:  {
-				required: true,
-				minlength: 4,
-			}	
-		},
-		messages: {
-			etunimi: {     
-				required: "Puuttuu",
-				minlength: "Liian lyhyt"			
-			},
-			sukunimi: {
-				required: "Puuttuu",
-				minlength: "Liian lyhyt"
-			},
-			puhelin: {
-				required: "Puuttuu",
-				minlength: "Liian lyhyt"
-			},
-			sposti: {
-				required: "Puuttuu",
-				minlength: "Liian lyhyt"
-			}
-		},			
-		submitHandler: function(form) {	
-			lisaaTiedot();
-		}		
-	}); 	
-});
+
+
+document.getElementById("etunimi").focus();
+
 
 function lisaaTiedot(){	
-	var formJsonStr = formDataJsonStr($("#tiedot").serializeArray());
-	$.ajax({url:"asiakkaat", data:formJsonStr, type:"POST", dataType:"json", success:function(result) {      
-		if(result.response==0){
-      	$("#ilmo").html("Asiakkaan lisääminen epäonnistui.");
-      }else if(result.response==1){			
-      	$("#ilmo").html("Asiakkaan lisääminen onnistui.");
-      	$("#etunimi", "#sukunimi", "#puhelin", "#sposti").val("");
+	var ilmo="";
+
+	if(document.getElementById("etunimi").value.length<1){
+		document.getElementById("ilmo").className = "ilmoitus virhe";
+		ilmo="Etunimi liian lyhyt";
+	}else if(document.getElementById("sukunimi").value.length<1){
+		document.getElementById("ilmo").className = "ilmoitus virhe";
+		ilmo="Sukunimi liian lyhyt";		
+	}else if(document.getElementById("puhelin").value.length<4){
+		document.getElementById("ilmo").className = "ilmoitus virhe";
+		ilmo="Puhelinnumero liian lyhyt";		
+	}else if(document.getElementById("puhelin").value*1!=document.getElementById("puhelin").value){
+		document.getElementById("ilmo").className = "ilmoitus virhe";
+		ilmo="Puhelinnumero ei ole luku";		
+	}else if(document.getElementById("sposti").value.length<5){
+		document.getElementById("ilmo").className = "ilmoitus virhe";
+		ilmo="Sähköposti on liian lyhyt";
+	}	
+	
+	if(ilmo!=""){
+		document.getElementById("ilmo").innerHTML=ilmo;
+		setTimeout(function(){ document.getElementById("ilmo").innerHTML=""; }, 3000);
+		return;
+	}
+	document.getElementById("etunimi").value=siivoa(document.getElementById("etunimi").value);
+	document.getElementById("sukunimi").value=siivoa(document.getElementById("sukunimi").value);
+	document.getElementById("puhelin").value=siivoa(document.getElementById("puhelin").value);
+	document.getElementById("sposti").value=siivoa(document.getElementById("sposti").value);	
+		
+	var formJsonStr=formDataToJSON(document.getElementById("tiedot"));
+
+	fetch("asiakkaat",{
+	      method: 'POST',
+	      body:formJsonStr
+	    })
+	.then( function (response) {		
+		return response.json()
+	})
+	.then( function (responseJson) {
+		var vastaus = responseJson.response;		
+		if(vastaus==0){
+			document.getElementById("ilmo").className = "ilmoitus virhe";
+			document.getElementById("ilmo").innerHTML= "Asiakkaan lisääminen epäonnistui";
+      	}else if(vastaus==1){
+      		document.getElementById("ilmo").className = "ilmoitus onnistuminen";
+      		document.getElementById("ilmo").innerHTML= "Asiakkaan lisääminen onnistui";			      	
 		}
-  }});	
+		setTimeout(function(){ document.getElementById("ilmo").innerHTML=""; }, 5000);
+	});	
+	document.getElementById("tiedot").reset();
 }
 </script>
 </html>
